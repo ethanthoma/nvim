@@ -15,12 +15,13 @@ return {
             nickel = { "nickel" },
             zig = { "zigfmt" },
             inko = { "inko" },
-            typst = { "typstyle", "mdformat" },
+            typst = { "typstfmt" },
             go = { "gci", "gofumpt" },
             markdown = { "mdformat" },
             templ = { "templ", "rustywind" },
             php = { "mago_format", "mago_lint" },
             kdl = { "kdlfmt" },
+            toml = { "taplo" },
         },
 
         formatters = {
@@ -43,6 +44,9 @@ return {
             },
             kdlfmt = {
                 args = { "format", "--kdl-version", "v2", "-" },
+            },
+            typstfmt = {
+                command = "typstfmt",
             },
         },
 
