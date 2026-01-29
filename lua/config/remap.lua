@@ -1,8 +1,5 @@
 -- Remap leader
 vim.g.mapleader = " "
--- Open netrw
-vim.keymap.set("n", "-", vim.cmd.Ex)
-
 -- Move selection up or down with J or K
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")

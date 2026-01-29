@@ -1,10 +1,6 @@
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
-        -- Linters
-        { "mfussenegger/nvim-lint" },
-
-        -- Autocompletion
         { "hrsh7th/nvim-cmp" },
         { "hrsh7th/cmp-nvim-lsp" },
     },
@@ -144,8 +140,6 @@ return {
                 config = {
                     capabilities = vim.lsp.protocol.make_client_capabilities(),
                     on_attach = function(client, bufnr)
-                        print("Flix LSP attached to buffer " .. bufnr)
-
                         vim.api.nvim_create_autocmd("BufWritePre", {
                             buffer = bufnr,
                             callback = function()
@@ -198,18 +192,5 @@ return {
                 vim.lsp.config(server_name, config)
             end
         end
-
-        -- Linters
-
-        require("lint").linters_by_ft = {
-            javascript = { "oxlint" },
-            rust = { "clippy" },
-        }
-
-        vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-            callback = function()
-                require("lint").try_lint()
-            end,
-        })
     end,
 }
