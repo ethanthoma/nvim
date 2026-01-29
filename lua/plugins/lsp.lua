@@ -70,7 +70,26 @@ return {
                     cmd = { "haskell-language-server", "--lsp" }
                 },
             },
-            rust_analyzer = { executable = "rust-analyzer", },
+            rust_analyzer = {
+                executable = "rust-analyzer",
+                config = {
+                    settings = {
+                        ["rust-analyzer"] = {
+                            checkOnSave = { enable = false },
+                            diagnostics = { enable = false },
+                        }
+                    }
+                }
+            },
+            bacon_ls = {
+                executable = "bacon-ls",
+                config = {
+                    init_options = {
+                        updateOnSave = true,
+                        updateOnSaveWaitMillis = 1000,
+                    }
+                }
+            },
             ols = { executable = "ols", },
             pylyzer = { executable = "pylyzer", },
             ruff = { executable = "ruff", },
@@ -184,6 +203,7 @@ return {
 
         require("lint").linters_by_ft = {
             javascript = { "oxlint" },
+            rust = { "clippy" },
         }
 
         vim.api.nvim_create_autocmd({ "BufWritePost" }, {
