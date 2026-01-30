@@ -106,6 +106,7 @@ return {
             kotlin_language_server = { executable = "kotlin-language-server" },
             pyre = { executable = "pyre" },
             pyright = { executable = "pyright" },
+            pyrefly = { executable = "pyrefly" },
             tailwindcss = {
                 executable = "tailwindcss-language-server",
                 config = {

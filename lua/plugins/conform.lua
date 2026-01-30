@@ -15,16 +15,22 @@ return {
             nickel = { "nickel" },
             zig = { "zigfmt" },
             inko = { "inko" },
-            typst = { "typstfmt" },
+            typst = { "typstyle" },
             go = { "gci", "gofumpt" },
             markdown = { "mdformat" },
             templ = { "templ", "rustywind" },
             php = { "mago_format", "mago_lint" },
             kdl = { "kdlfmt" },
             toml = { "taplo" },
+            bzl = { "buildifier" },
+            wgsl = { "wgslfmt" },
         },
 
         formatters = {
+            wgslfmt = {
+                command = "wgslfmt",
+                stdin = true,
+            },
             nickel = {
                 command = "nickel",
                 stdin = true,
