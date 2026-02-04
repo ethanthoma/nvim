@@ -24,6 +24,7 @@ return {
             toml = { "taplo" },
             bzl = { "buildifier" },
             wgsl = { "wgslfmt" },
+            yaml = { "yamlfmt" },
         },
 
         formatters = {
@@ -38,7 +39,7 @@ return {
             },
             mdformat = {
                 command = "mdformat",
-                args = { "--wrap", "80", "-" },
+                args = { "--wrap", "80", "--number", "-" },
             },
             mago_format = {
                 command = "mago",
@@ -60,6 +61,6 @@ return {
             lsp_format = "fallback",
         },
 
-        format_on_save = { timeout_ms = 500 },
+        format_after_save = { lsp_format = "fallback" },
     },
 }
