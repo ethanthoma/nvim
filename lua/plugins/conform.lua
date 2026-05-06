@@ -25,9 +25,15 @@ return {
             bzl = { "buildifier" },
             wgsl = { "wgslfmt" },
             yaml = { "yamlfmt" },
+            terraform = { "tofu_fmt" },
         },
 
         formatters = {
+            typstyle = {
+                command = "typstyle",
+                stdin = true,
+                args = { "-l", "80", "--wrap-text" },
+            },
             wgslfmt = {
                 command = "wgslfmt",
                 stdin = true,
