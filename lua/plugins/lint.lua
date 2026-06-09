@@ -7,6 +7,8 @@ return {
             rust = { "clippy" },
         }
 
+        require("lint").linters.clippy.ignore_exitcode = true
+
         vim.api.nvim_create_autocmd({ "BufWritePost" }, {
             callback = function()
                 local lint = require("lint")
