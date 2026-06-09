@@ -1,0 +1,292 @@
+-- hypersubatomic — ported from the VSCode theme by U.S. Graphics Co.
+-- https://github.com/usgraphics/hypersubatomic-vscode-theme
+
+vim.cmd.highlight('clear')
+if vim.fn.exists('syntax_on') == 1 then vim.cmd.syntax('reset') end
+vim.o.termguicolors = true
+vim.o.background = 'dark'
+vim.g.colors_name = 'hypersubatomic'
+
+local transparent = true
+
+local p = {
+    bg       = '#0F111A',
+    bg_dark  = '#090B10',
+    bg_input = '#1A1C25',
+    cursorln = '#161821',
+    visual   = '#404667',
+    fg       = '#c5cdda',
+    white    = '#eef6ff',
+    comment  = '#6b7ea8',
+    linenr   = '#3B3F51',
+    subtle   = '#4B526D',
+    border   = '#383a3f',
+
+    green    = '#00ae6b',
+    red      = '#f2283c',
+    blue     = '#277dff',
+    blue2    = '#0093FF',
+    cyan     = '#00a1b4',
+    yellow   = '#ffc200',
+    magenta  = '#d72e82',
+    violet   = '#875afb',
+    orange   = '#ff7a00',
+    gray     = '#bababa',
+}
+
+local bg = transparent and 'NONE' or p.bg
+local bg_float = transparent and 'NONE' or p.bg_dark
+
+local groups = {
+    Normal = { fg = p.fg, bg = bg },
+    NormalNC = { fg = p.fg, bg = bg },
+    NormalFloat = { fg = p.fg, bg = bg_float },
+    FloatBorder = { fg = p.subtle, bg = bg_float },
+    FloatTitle = { fg = p.yellow, bold = true },
+    ColorColumn = { bg = p.bg_dark },
+    Cursor = { fg = p.bg, bg = p.yellow },
+    lCursor = { fg = p.bg, bg = p.yellow },
+    CursorLine = { bg = p.cursorln },
+    CursorColumn = { bg = p.cursorln },
+    CursorLineNr = { fg = p.white, bold = true },
+    LineNr = { fg = p.linenr },
+    SignColumn = { bg = bg },
+    FoldColumn = { fg = p.linenr, bg = bg },
+    Folded = { fg = p.comment, bg = p.cursorln },
+    VertSplit = { fg = p.border },
+    WinSeparator = { fg = p.border },
+    Visual = { bg = p.visual },
+    VisualNOS = { bg = p.visual },
+    Search = { fg = p.bg, bg = p.yellow },
+    IncSearch = { fg = p.bg, bg = p.orange },
+    CurSearch = { fg = p.bg, bg = p.orange },
+    Substitute = { fg = p.bg, bg = p.red },
+    MatchParen = { fg = p.yellow, bold = true, underline = true },
+    NonText = { fg = p.linenr },
+    Whitespace = { fg = p.linenr },
+    SpecialKey = { fg = p.linenr },
+    EndOfBuffer = { fg = bg == 'NONE' and p.bg or bg },
+    Conceal = { fg = p.subtle },
+    Directory = { fg = p.green },
+    OilDir = { fg = p.green },
+    OilDirIcon = { fg = p.green },
+    OilFile = { fg = p.white },
+    OilHidden = { fg = '#565d6b' },
+    OilFileHidden = { fg = '#565d6b' },
+    OilDirHidden = { fg = '#565d6b' },
+    OilLinkHidden = { fg = '#565d6b' },
+    Title = { fg = p.yellow, bold = true },
+    ErrorMsg = { fg = p.red },
+    WarningMsg = { fg = p.yellow },
+    ModeMsg = { fg = p.fg },
+    MoreMsg = { fg = p.green },
+    Question = { fg = p.green },
+    WinBar = { fg = p.fg, bold = true },
+    WinBarNC = { fg = p.subtle },
+    QuickFixLine = { bg = p.cursorln, bold = true },
+
+    StatusLine = { fg = p.fg, bg = p.bg_dark },
+    StatusLineNC = { fg = p.subtle, bg = p.bg_dark },
+    TabLine = { fg = p.subtle, bg = p.bg_dark },
+    TabLineFill = { bg = p.bg_dark },
+    TabLineSel = { fg = p.white, bg = bg },
+
+    Pmenu = { fg = p.fg, bg = p.bg_dark },
+    PmenuSel = { fg = p.yellow, bg = p.bg_input, bold = true },
+    PmenuSbar = { bg = p.bg_dark },
+    PmenuThumb = { bg = p.subtle },
+    PmenuKind = { fg = p.violet, bg = p.bg_dark },
+    WildMenu = { fg = p.bg, bg = p.green },
+
+    -- legacy syntax
+    Comment = { fg = p.comment, italic = true },
+    Constant = { fg = p.red },
+    String = { fg = p.red },
+    Character = { fg = p.red },
+    Number = { fg = p.violet },
+    Float = { fg = p.violet },
+    Boolean = { fg = p.red },
+    Identifier = { fg = p.fg },
+    Function = { fg = p.green },
+    Statement = { fg = p.green },
+    Conditional = { fg = p.violet },
+    Repeat = { fg = p.violet },
+    Label = { fg = p.violet },
+    Operator = { fg = p.blue2 },
+    Keyword = { fg = p.green },
+    Exception = { fg = p.violet },
+    PreProc = { fg = p.violet },
+    Include = { fg = p.violet },
+    Define = { fg = p.violet },
+    Macro = { fg = p.violet },
+    PreCondit = { fg = p.violet },
+    Type = { fg = p.orange },
+    StorageClass = { fg = p.green },
+    Structure = { fg = p.orange },
+    Typedef = { fg = p.orange },
+    Special = { fg = p.magenta },
+    SpecialChar = { fg = p.magenta },
+    Tag = { fg = p.yellow },
+    Delimiter = { fg = p.fg },
+    SpecialComment = { fg = p.comment, italic = true },
+    Debug = { fg = p.red },
+    Underlined = { fg = p.blue, underline = true },
+    Ignore = { fg = p.linenr },
+    Error = { fg = p.red },
+    Todo = { fg = p.yellow, bold = true },
+
+    DiffAdd = { bg = '#10261c' },
+    DiffChange = { bg = '#26230c' },
+    DiffDelete = { fg = p.red, bg = '#2a1014' },
+    DiffText = { bg = '#3a3410', bold = true },
+    diffAdded = { fg = p.green },
+    diffRemoved = { fg = p.red },
+    diffChanged = { fg = p.yellow },
+
+    SpellBad = { undercurl = true, sp = p.red },
+    SpellCap = { undercurl = true, sp = p.yellow },
+    SpellLocal = { undercurl = true, sp = p.cyan },
+    SpellRare = { undercurl = true, sp = p.violet },
+
+    DiagnosticError = { fg = p.red },
+    DiagnosticWarn = { fg = p.yellow },
+    DiagnosticInfo = { fg = p.cyan },
+    DiagnosticHint = { fg = p.violet },
+    DiagnosticOk = { fg = p.green },
+    DiagnosticUnderlineError = { undercurl = true, sp = p.red },
+    DiagnosticUnderlineWarn = { undercurl = true, sp = p.yellow },
+    DiagnosticUnderlineInfo = { undercurl = true, sp = p.cyan },
+    DiagnosticUnderlineHint = { undercurl = true, sp = p.violet },
+    DiagnosticUnnecessary = { undercurl = true, sp = p.yellow },
+    DiagnosticSignHint = { fg = p.yellow },
+
+    LspReferenceText = { bg = p.cursorln },
+    LspReferenceRead = { bg = p.cursorln },
+    LspReferenceWrite = { bg = p.cursorln },
+    LspInlayHint = { fg = p.subtle, italic = true },
+    LspSignatureActiveParameter = { fg = p.yellow, bold = true },
+
+    -- treesitter
+    ['@comment'] = { link = 'Comment' },
+    ['@comment.documentation'] = { fg = p.comment },
+    ['@comment.error'] = { fg = p.red },
+    ['@comment.warning'] = { fg = p.yellow },
+    ['@comment.todo'] = { fg = p.yellow, bold = true },
+    ['@comment.note'] = { fg = p.cyan },
+    ['@operator'] = { fg = p.blue2 },
+    ['@punctuation.delimiter'] = { fg = p.fg },
+    ['@punctuation.bracket'] = { fg = p.gray },
+    ['@punctuation.special'] = { fg = p.magenta },
+    ['@string'] = { fg = p.red },
+    ['@string.regexp'] = { fg = p.cyan },
+    ['@string.escape'] = { fg = p.magenta },
+    ['@string.special'] = { fg = p.magenta },
+    ['@string.special.url'] = { fg = p.blue, underline = true },
+    ['@character'] = { fg = p.red },
+    ['@character.special'] = { fg = p.magenta },
+    ['@boolean'] = { fg = p.red },
+    ['@number'] = { fg = p.violet },
+    ['@number.float'] = { fg = p.violet },
+    ['@constant'] = { fg = p.red },
+    ['@constant.builtin'] = { fg = p.red },
+    ['@constant.macro'] = { fg = p.violet },
+    ['@variable'] = { fg = p.fg },
+    ['@variable.builtin'] = { fg = p.yellow },
+    ['@variable.parameter'] = { fg = p.red },
+    ['@variable.member'] = { fg = p.fg },
+    ['@field'] = { fg = p.fg },
+    ['@property'] = { fg = p.fg },
+    ['@function'] = { fg = p.green },
+    ['@function.builtin'] = { fg = p.green },
+    ['@function.call'] = { fg = p.green },
+    ['@function.macro'] = { fg = p.violet },
+    ['@function.method'] = { fg = p.green },
+    ['@function.method.call'] = { fg = p.green },
+    ['@constructor'] = { fg = p.red },
+    ['@keyword'] = { fg = p.green },
+    ['@keyword.function'] = { fg = p.green },
+    ['@keyword.operator'] = { fg = p.blue2 },
+    ['@keyword.return'] = { fg = p.violet },
+    ['@keyword.conditional'] = { fg = p.violet },
+    ['@keyword.repeat'] = { fg = p.violet },
+    ['@keyword.import'] = { fg = p.violet },
+    ['@keyword.exception'] = { fg = p.violet },
+    ['@keyword.directive'] = { fg = p.violet },
+    ['@type'] = { fg = p.orange },
+    ['@type.builtin'] = { fg = p.orange },
+    ['@type.definition'] = { fg = p.orange },
+    ['@type.qualifier'] = { fg = p.green },
+    ['@attribute'] = { fg = p.green },
+    ['@module'] = { fg = p.orange },
+    ['@namespace'] = { fg = p.orange },
+    ['@label'] = { fg = p.violet },
+    ['@tag'] = { fg = p.yellow },
+    ['@tag.attribute'] = { fg = p.green },
+    ['@tag.delimiter'] = { fg = p.fg },
+    ['@markup.heading'] = { fg = p.yellow, bold = true },
+    ['@markup.strong'] = { bold = true },
+    ['@markup.italic'] = { italic = true },
+    ['@markup.strikethrough'] = { strikethrough = true },
+    ['@markup.underline'] = { underline = true },
+    ['@markup.link'] = { fg = p.blue, underline = true },
+    ['@markup.link.url'] = { fg = p.cyan, underline = true },
+    ['@markup.link.label'] = { fg = p.magenta },
+    ['@markup.list'] = { fg = p.green },
+    ['@markup.quote'] = { fg = p.violet, italic = true },
+    ['@markup.raw'] = { fg = p.cyan },
+    ['@markup.raw.block'] = { fg = p.cyan },
+    ['@markup.math'] = { fg = p.cyan },
+    ['@diff.plus'] = { fg = p.green },
+    ['@diff.minus'] = { fg = p.red },
+    ['@diff.delta'] = { fg = p.yellow },
+
+    -- lsp semantic tokens
+    ['@lsp.type.class'] = { fg = p.orange },
+    ['@lsp.type.struct'] = { fg = p.orange },
+    ['@lsp.type.enum'] = { fg = p.orange },
+    ['@lsp.type.interface'] = { fg = p.orange },
+    ['@lsp.type.type'] = { fg = p.orange },
+    ['@lsp.type.namespace'] = { fg = p.orange },
+    ['@lsp.type.enumMember'] = { fg = p.red },
+    ['@lsp.type.parameter'] = { fg = p.red },
+    ['@lsp.type.property'] = { fg = p.fg },
+    ['@lsp.type.decorator'] = { fg = p.green },
+    ['@lsp.type.function'] = { fg = p.green },
+    ['@lsp.type.method'] = { fg = p.green },
+    ['@lsp.type.keyword'] = { fg = p.green },
+
+    -- telescope
+    TelescopeBorder = { fg = p.subtle, bg = 'NONE' },
+    TelescopeNormal = { bg = 'NONE' },
+    TelescopePromptNormal = { bg = p.bg_input },
+    TelescopeResultsNormal = { fg = p.subtle, bg = 'NONE' },
+    TelescopeSelection = { fg = p.white, bg = p.bg_input },
+    TelescopeSelectionCaret = { fg = p.red, bg = p.bg_input },
+    TelescopeMatching = { fg = p.yellow, bold = true },
+
+    -- gitsigns
+    GitSignsAdd = { fg = p.green },
+    GitSignsChange = { fg = p.yellow },
+    GitSignsDelete = { fg = p.red },
+}
+
+for group, opts in pairs(groups) do
+    vim.api.nvim_set_hl(0, group, opts)
+end
+
+vim.g.terminal_color_0 = '#000000'
+vim.g.terminal_color_1 = p.red
+vim.g.terminal_color_2 = p.green
+vim.g.terminal_color_3 = p.yellow
+vim.g.terminal_color_4 = p.blue
+vim.g.terminal_color_5 = p.violet
+vim.g.terminal_color_6 = p.cyan
+vim.g.terminal_color_7 = '#ffffff'
+vim.g.terminal_color_8 = '#464B5D'
+vim.g.terminal_color_9 = p.red
+vim.g.terminal_color_10 = p.green
+vim.g.terminal_color_11 = p.yellow
+vim.g.terminal_color_12 = p.blue
+vim.g.terminal_color_13 = p.violet
+vim.g.terminal_color_14 = p.cyan
+vim.g.terminal_color_15 = '#ffffff'

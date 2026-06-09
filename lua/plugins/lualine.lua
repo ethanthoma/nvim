@@ -2,6 +2,28 @@ return {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
     config = function()
+        local c = {
+            bg = '#090B10', fg = '#c5cdda',
+            green = '#00ae6b', yellow = '#ffc200', red = '#f2283c',
+            violet = '#875afb', blue = '#277dff',
+        }
+        local hypersubatomic = {
+            normal = {
+                a = { fg = c.bg, bg = c.green, gui = 'bold' },
+                b = { fg = c.fg, bg = c.bg },
+                c = { fg = c.fg, bg = 'NONE' },
+            },
+            insert = { a = { fg = c.bg, bg = c.yellow, gui = 'bold' } },
+            visual = { a = { fg = c.bg, bg = c.violet, gui = 'bold' } },
+            replace = { a = { fg = c.bg, bg = c.red, gui = 'bold' } },
+            command = { a = { fg = c.bg, bg = c.blue, gui = 'bold' } },
+            inactive = {
+                a = { fg = c.fg, bg = c.bg },
+                b = { fg = c.fg, bg = c.bg },
+                c = { fg = c.fg, bg = 'NONE' },
+            },
+        }
+
         local noice_component = {
             {
                 require("noice").api.status.message.get_hl,
@@ -10,7 +32,7 @@ return {
             {
                 require("noice").api.status.command.get,
                 cond = require("noice").api.status.command.has,
-                color = { fg = "#e0def4" },
+                color = { fg = c.fg },
             },
         }
 
@@ -38,7 +60,7 @@ return {
             extensions = {
                 'oil'
             },
-            theme = 'rose-pine',
+            theme = hypersubatomic,
         }
     end,
 }
