@@ -1,16 +1,7 @@
 return {
     "neovim/nvim-lspconfig",
-    dependencies = {
-        { "hrsh7th/nvim-cmp" },
-        { "hrsh7th/cmp-nvim-lsp" },
-    },
     config = function()
-        local lspconfig_defaults = require('lspconfig').util.default_config
-        lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-            'force',
-            lspconfig_defaults.capabilities,
-            require('cmp_nvim_lsp').default_capabilities()
-        )
+        vim.lsp.config('*', { capabilities = require('blink.cmp').get_lsp_capabilities() })
 
         vim.api.nvim_create_autocmd('LspAttach', {
             desc = "LSP actions",
@@ -21,8 +12,6 @@ return {
                 vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
                 vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
                 vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-                vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-                vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
                 vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
                 vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
                 vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
