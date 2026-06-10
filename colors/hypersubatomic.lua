@@ -204,7 +204,7 @@ local groups = {
     ['@function.method.call'] = { fg = p.green },
     ['@constructor'] = { fg = p.red },
     ['@keyword'] = { fg = p.green },
-    ['@keyword.function'] = { fg = p.green },
+    ['@keyword.function'] = { fg = p.blue2 },
     ['@keyword.operator'] = { fg = p.blue2 },
     ['@keyword.return'] = { fg = p.violet },
     ['@keyword.conditional'] = { fg = p.violet },
