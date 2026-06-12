@@ -57,14 +57,6 @@ return {
             },
             rust_analyzer = {
                 executable = "rust-analyzer",
-                config = {
-                    settings = {
-                        ["rust-analyzer"] = {
-                            checkOnSave = { enable = false },
-                            diagnostics = { enable = false },
-                        }
-                    }
-                }
             },
             bacon_ls = {
                 executable = "bacon-ls",
